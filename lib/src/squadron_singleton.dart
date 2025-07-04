@@ -13,11 +13,17 @@ class Squadron {
   /// Gets the current platform type.
   static final platformType = impl.getPlatformType();
 
+  /// Optional base URL for assets on Web platforms.
+  static String? assetBase;
+
   /// Parse [url] and returns the corresponding [Uri].
   ///
-  /// On Web platforms, a leading '~' character will be replaced with the
+  /// On Web platforms, a leading `~` character will be replaced with the
   /// current page's root URL. E.g. '~/workers' from '/path/to/index.html'
   /// will return '/path/to/workers'.
+  /// A leading `@` character will be replaced with the value from
+  /// [Squadron.assetBase]. E.g. '@/workers' when
+  /// [Squadron.assetBase] = '/assets' will return '/assets/workers'.
   static Uri uri(String url) => impl.mapUrl(url);
 
   static final identical = impl.isSameInstance;

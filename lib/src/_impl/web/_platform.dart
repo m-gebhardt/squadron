@@ -7,6 +7,7 @@ import '../../converters/cast_converter.dart';
 import '../../converters/converter.dart';
 import '../../converters/num_converter.dart';
 import '../../squadron_platform_type.dart';
+import '../../squadron_singleton.dart';
 import '../../utils.dart';
 import '_patch.dart';
 
@@ -30,7 +31,10 @@ Uri mapUrl(String url) {
     if (root != null) {
       url = '$root${url.substring(1)}';
     }
+  } else if (url.startsWith('@') && Squadron.assetBase != null) {
+    url = '${Squadron.assetBase}${url.substring(1)}';
   }
+
   return Uri.parse(url).normalizePath();
 }
 
