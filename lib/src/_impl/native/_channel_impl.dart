@@ -89,7 +89,7 @@ final class _VmChannel implements Channel {
         if (!controller.isClosed) controller.add(msg);
       }
 
-      void $forwardError(Object error, StackTrace? st) {
+      void $forwardError(Object error, [StackTrace? st]) {
         if (!controller.isClosed) {
           controller.addError(SquadronException.from(error, st, command));
         }
@@ -119,6 +119,8 @@ final class _VmChannel implements Channel {
           $forwardError(ex, st);
           _leave(controller);
         }
+      }, onCancel: () {
+        _leave(controller);
       });
       return controller.stream;
     }

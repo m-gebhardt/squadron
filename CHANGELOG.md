@@ -1,3 +1,18 @@
+## 7.2.0
+
+- Support sending Dart `DateTime` / JS `Date` instances to/from Workers.
+- Fix warnings from [pub.dev](https://pub.dev/packages/squadron/score).
+
+## 7.1.2+1
+
+- Fix warnings from [pub.dev](https://pub.dev/packages/squadron/score).
+
+## 7.1.2
+
+- Expose the count of active connections via the worker's stats.
+- Added tests from https://github.com/d-markey/squadron/pull/71 to check for memory leaks. Credits go to https://github.com/jpohhhh, thanks!
+- Properly close `ForwardStreamController` on VM to avoid memory leaks -- fixes https://github.com/d-markey/squadron/issues/70.
+
 ## 7.1.1
 
 - Be less aggressive on task scheduling in Worker pools. When synchronously submitting many tasks to the pool, the `_schedule` synchronous method was systematically called and would block the event loop. This version uses a timer to avoid flooding the pool's scheduler.
